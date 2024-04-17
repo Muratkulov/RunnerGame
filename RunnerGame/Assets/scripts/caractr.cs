@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -10,6 +11,12 @@ public class Character : MonoBehaviour
     private void Update()
     {
         Run();
+
+        bool isSpaceClicked = Input.GetKeyUp(KeyCode.Space);
+        if (isSpaceClicked == true)
+        {
+            Boost(2);
+        }
     }
 
     public void Boost(float multiplier)
@@ -20,16 +27,35 @@ public class Character : MonoBehaviour
     {
         isJumping = true;
     }
-
     private void Run()
     {
+        transform.position = GetNextPosition(speed);
+    }
+
+    private Vector3 GetNextPosition(float stepLenth)
+    {
         Vector3 newPosition = new Vector3();
+
         newPosition.x = transform.position.x;
         newPosition.y = transform.position.y;
-        newPosition.z = transform.position.z + speed;
+        newPosition.z = transform.position.z + stepLenth;
 
 
-        transform.position = newPosition;
+        return newPosition;
 
     }
+    private int GetSum(int firstNumber, int secondNumber)
+    {
+        int sum = 0;
+        sum = firstNumber + secondNumber;
+        return sum;
+    }
+    private float jarymynber(int number)
+    {
+        float sum = 0;
+        sum = number / 2;
+
+        return sum;
+    }
 }
+
