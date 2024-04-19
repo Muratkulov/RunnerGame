@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neme: 
-  speed: 0.5
+  speed: 0.05
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
