@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public string neme;
-    private bool isFinished;
 
-    [SerializeField] private float speed;
-    private bool isJumping;
+    [SerializeField] private float forwardspeed;
+    [SerializeField] private float sidespeed;
     private void Update()
     {
-        Run();
+        if (Input.GetKey(KeyCode.D) == true)
+        {
+            transform.position = GetNextPosition(forwardspeed, 1);
 
-        bool isSpaceClicked = Input.GetKeyUp(KeyCode.Space);
-        if (isSpaceClicked == true)
+        }
+        else if (Input.GetKey(KeyCode.A) == true)
+        {
+            transform.position = GetNextPosition(forwardspeed, -1);
+        }
+        if (CanBoost() == true)
         {
             Boost(2);
         }
@@ -21,22 +25,17 @@ public class Character : MonoBehaviour
 
     public void Boost(float multiplier)
     {
-        speed = speed * multiplier;
-    }
-    private void Jump()
-    {
-        isJumping = true;
-    }
-    private void Run()
-    {
-        transform.position = GetNextPosition(speed);
+        forwardspeed = forwardspeed * multiplier;
+        ; sidespeed = sidespeed * multiplier;
     }
 
-    private Vector3 GetNextPosition(float stepLenth)
+
+
+    private Vector3 GetNextPosition(float stepLenth, float sideDirection)
     {
         Vector3 newPosition = new Vector3();
 
-        newPosition.x = transform.position.x;
+        newPosition.x = transform.position.x + sideDirection * sidespeed;
         newPosition.y = transform.position.y;
         newPosition.z = transform.position.z + stepLenth;
 
@@ -44,18 +43,14 @@ public class Character : MonoBehaviour
         return newPosition;
 
     }
-    private int GetSum(int firstNumber, int secondNumber)
-    {
-        int sum = 0;
-        sum = firstNumber + secondNumber;
-        return sum;
-    }
-    private float jarymynber(int number)
-    {
-        float sum = 0;
-        sum = number / 2;
 
-        return sum;
+    private bool CanBoost()
+
+
+    {
+        return Input.GetKeyUp(KeyCode.Space);
     }
+
+
+
 }
-
